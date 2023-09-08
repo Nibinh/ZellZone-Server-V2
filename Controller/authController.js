@@ -1,6 +1,7 @@
 const User = require("../Models/users");
 const bcrypt = require("bcryptjs");
 
+//Resgistraton
 const registerUser = async (req, res) => {
   try {
     const { email, name, password, confirmPassword, phonenumber, address } =
@@ -45,6 +46,24 @@ const registerUser = async (req, res) => {
   }
 };
 
+//Login
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    //Checking all feilds are available
+    if (!email || !password) return res.status(400).send("Fill al the feilds");
+    //checking is email is registered or not
+    const data = await User.findOne({ email });
+    if (!data) return res.status(400).send("Invalid Credentials");
+    //comparing passwords
+    const isMatch = await bcrypt.compare(password, data.password);
+    if (!isMatch) return res.status(400).send("Invalid Credentials");
+    res.status(200).send("login Successfull");
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   registerUser,
+  loginUser,
 };
