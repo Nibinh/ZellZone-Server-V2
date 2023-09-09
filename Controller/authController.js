@@ -35,6 +35,7 @@ const registerUser = async (req, res) => {
       const data = await User.create({
         email,
         name,
+        imageName: req.file.key,
         password: hashPassword,
         phonenumber,
         address,
