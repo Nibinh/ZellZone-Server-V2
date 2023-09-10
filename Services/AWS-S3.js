@@ -16,7 +16,7 @@ const s3Client = new S3Client({
   },
 });
 
-module.exports.upload = multer({
+const upload = multer({
   storage: multerS3({
     s3: s3Client,
     bucket: bucketName,
@@ -25,3 +25,8 @@ module.exports.upload = multer({
     },
   }),
 });
+
+module.exports = {
+  upload,
+  s3Client,
+};
