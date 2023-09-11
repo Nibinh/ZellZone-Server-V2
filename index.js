@@ -16,6 +16,8 @@ server.listen(PORT, () => {
 
 const authRoute = require("./Routes/authRoute");
 const userRoutes = require("./Routes/userRoutes");
+const productRoutes = require("./Routes/productRoute");
 
 server.use("/auth", authRoute);
 server.use("/user", userRoutes);
+server.use("/product", productRoutes);

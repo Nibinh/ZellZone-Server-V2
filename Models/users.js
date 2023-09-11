@@ -26,6 +26,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    soldProducts: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
     imageUrl: {
       type: String,
     },

@@ -1,7 +1,7 @@
 const mongoose = require("../Services/db");
 
 const productSchema = mongoose.Schema({
-  productname: {
+  productName: {
     type: String,
     required: true,
   },
@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  imagename: {
+  imageName: {
     type: String,
     required: true,
   },
@@ -32,6 +32,9 @@ const productSchema = mongoose.Schema({
   active: {
     type: Boolean,
     default: false,
+  },
+  imageUrl: {
+    type: String,
   },
   created: {
     type: Date,

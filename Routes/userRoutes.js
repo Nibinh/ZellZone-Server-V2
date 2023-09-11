@@ -7,6 +7,6 @@ const user = require("../Controller/userController");
 
 router.get("/getUser/:id", verifyToken, user.getUser);
 router.get("/getallusers", user.gettingAllUsers);
-router.put("/edituser/:id", upload.single("image"), user.editUser);
+router.put("/edituser/:id", verifyToken, upload.single("image"), user.editUser);
 
 module.exports = router;
