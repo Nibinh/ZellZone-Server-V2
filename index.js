@@ -18,8 +18,10 @@ const authRoute = require("./Routes/authRoute");
 const userRoutes = require("./Routes/userRoutes");
 const productRoutes = require("./Routes/productRoute");
 const wishlistRoutes = require("./Routes/wishlistRoute");
+const soldProductRoutes = require("./Routes/sellProdRoutes");
 
 server.use("/auth", authRoute);
 server.use("/user", userRoutes);
 server.use("/product", productRoutes);
 server.use("/wishlist", wishlistRoutes);
+server.use("/sold", soldProductRoutes);
