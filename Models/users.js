@@ -27,6 +27,7 @@ const userSchema = mongoose.Schema(
       required: true,
     },
     soldProducts: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
+    wishlist: [{ type: mongoose.Schema.ObjectId, ref: "Product" }],
     imageUrl: {
       type: String,
     },
