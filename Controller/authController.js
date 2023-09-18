@@ -8,7 +8,7 @@ const registerUser = async (req, res) => {
   try {
     const { email, name, password, confirmPassword, phonenumber, address } =
       req.body;
-    //checking if user already is existing or not
+    // checking if user already is existing or not
     const isExisting = await User.findOne({ email });
     if (isExisting) return res.status(400).send("Email is already Registered");
     //checking all fields are filled or not
@@ -43,9 +43,11 @@ const registerUser = async (req, res) => {
       res.status(200).send("Account Created");
     } catch (error) {
       console.log(error);
+      res.status(500).json({ error: "An error occurred: " + error.message });
     }
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "An fferror occurred: " + error.message });
   }
 };
 
@@ -63,16 +65,19 @@ const loginUser = async (req, res) => {
     if (!isMatch) return res.status(400).send("Invalid Credentials");
     //generate JWT
     const token = JWT.sign({ email: data.email }, JWT_KEY, {
-      expiresIn: "1hr",
+      expiresIn: "2hr",
     });
     if (!token) return res.status(200).send("Token not generated");
+
+    const fEmail = data.email;
 
     res
       .cookie("token", token, { httpOnly: true })
       .status(200)
-      .send("login Successfull");
+      .json({ message: "login Successfull", email: data.email });
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
   }
 };
 module.exports = {

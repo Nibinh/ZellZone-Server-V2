@@ -4,6 +4,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const server = express();
+server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 server.use(express.json());
 dotenv.config();
 server.use(cookieParser());
@@ -19,9 +20,11 @@ const userRoutes = require("./Routes/userRoutes");
 const productRoutes = require("./Routes/productRoute");
 const wishlistRoutes = require("./Routes/wishlistRoute");
 const soldProductRoutes = require("./Routes/sellProdRoutes");
+const adminRoutes = require("./Routes/adminRoute");
 
 server.use("/auth", authRoute);
 server.use("/user", userRoutes);
 server.use("/product", productRoutes);
 server.use("/wishlist", wishlistRoutes);
 server.use("/sold", soldProductRoutes);
+server.use("/admin", adminRoutes);

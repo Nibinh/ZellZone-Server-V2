@@ -1,7 +1,5 @@
 const User = require("../Models/users");
-const Product = require("../Models/products");
 const { getImageUrlFromS3 } = require("../Services/AWS-getImage");
-const { deleteProduct } = require("./productController");
 
 const viewAllSellProd = async (req, res) => {
   try {

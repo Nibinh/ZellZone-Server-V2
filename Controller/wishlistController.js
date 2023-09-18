@@ -5,10 +5,11 @@ const { getImageUrlFromS3 } = require("../Services/AWS-getImage");
 //adding Product to Wishlist
 const addToWishlist = async (req, res) => {
   try {
-    const { userId, prodId } = req.params;
-    console.log(userId);
+    const { userEmail, prodId } = req.params;
+    console.log(req.params);
+    console.log(userEmail);
     console.log(prodId);
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ email: userEmail });
     if (!user) return res.status(400).send("user not available");
 
     const product = await Product.findOne({ _id: prodId });
@@ -19,14 +20,16 @@ const addToWishlist = async (req, res) => {
     res.status(200).send("Added to Wishlsit");
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
   }
 };
 
 //removing from wishlist
 const removeFromWishlist = async (req, res) => {
   try {
-    const { userId, prodId } = req.params;
-    const user = await User.findOne({ _id: userId });
+    const { userEmail, prodId } = req.params;
+    console.log(req.params);
+    const user = await User.findOne({ email: userEmail });
     if (!user) return res.status(400).send("user not available");
 
     const product = await Product.findOne({ _id: prodId });
@@ -36,7 +39,7 @@ const removeFromWishlist = async (req, res) => {
     user.save();
     res.status(200).send("Removed from Wishlsit");
   } catch (error) {
-    console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
   }
 };
 
@@ -55,7 +58,7 @@ const viewAllWishlist = async (req, res) => {
     }
 
     await data.save();
-    res.status(200).send(data);
+    res.status(200).send(data.wishlist);
   } catch (error) {
     console.log(error);
   }
