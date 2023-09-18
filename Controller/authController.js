@@ -77,10 +77,23 @@ const loginUser = async (req, res) => {
       .json({ message: "login Successfull", email: data.email });
   } catch (error) {
     console.log(error);
+  }
+};
+
+//logout user
+
+const logout = async (req, res) => {
+  try {
+    res.clearCookie("token", { httpOnly: true, expires: new Date(0) });
+    res.status(200).send("Logout Successfull");
+    console.log("logoutuser");
+  } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "An error occurred: " + error.message });
   }
 };
 module.exports = {
   registerUser,
   loginUser,
+  logout,
 };

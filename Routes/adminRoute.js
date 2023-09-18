@@ -14,5 +14,11 @@ router.get(
   admin.activatingProducts
 );
 router.get("/adminveiwproduct/:id", adminVerifyToken, admin.adminVeiwProduct);
+router.delete(
+  "/admindeleteproduct/:id",
+  adminVerifyToken,
+  admin.adminDeleteProduct
+);
+router.post("/logout", adminVerifyToken, admin.adminLogout);
 
 module.exports = router;

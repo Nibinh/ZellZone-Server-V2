@@ -195,7 +195,40 @@ const adminVeiwProduct = async (req, res) => {
     res.status(500).json({ error: "An error occurred: " + error.message });
   }
 };
+//admin deleting product
+const adminDeleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await Product.findByIdAndRemove({ _id: id });
+    if (!data) return res.status(400).send("Product not Found");
 
+    const param = {
+      Bucket: bucketName,
+      Key: data.imageName,
+    };
+    const command = new DeleteObjectCommand(param);
+    await s3Client.send(command);
+
+    const user = await User.findOne({ _id: data.sellerId });
+    user.soldProducts.pull(id);
+    user.save();
+    res.status(200).send("DELETED");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
+  }
+};
+
+//admin logout
+const adminLogout = async (req, res) => {
+  try {
+    res.clearCookie("adminToken", { httpOnly: true, expires: new Date(0) });
+    res.status(200).send("Logout Successfull");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "An error occurred: " + error.message });
+  }
+};
 module.exports = {
   AdminRegistration,
   AdminLogin,
@@ -204,4 +237,6 @@ module.exports = {
   getNonActiveProducts,
   activatingProducts,
   adminVeiwProduct,
+  adminDeleteProduct,
+  adminLogout,
 };

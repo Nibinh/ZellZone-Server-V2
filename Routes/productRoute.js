@@ -5,9 +5,14 @@ const { upload } = require("../Services/AWS-S3");
 
 const prodController = require("../Controller/productController");
 
-router.post("/addproduct", upload.single("image"), prodController.addProduct);
-router.get("/veiwproduct/:id", prodController.veiwProduct);
+router.post(
+  "/addproduct",
+  verifyToken,
+  upload.single("image"),
+  prodController.addProduct
+);
+router.get("/veiwproduct/:id", verifyToken, prodController.veiwProduct);
 router.get("/allproducts", prodController.getAllProducts);
-router.delete("/deleteproduct/:id", prodController.deleteProduct);
+router.delete("/deleteproduct/:id", verifyToken, prodController.deleteProduct);
 
 module.exports = router;
