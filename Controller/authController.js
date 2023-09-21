@@ -72,7 +72,7 @@ const loginUser = async (req, res) => {
     const fEmail = data.email;
 
     res
-      .cookie("token", token, { httpOnly: true })
+      .cookie("token", token, { httpOnly: true, secure: true })
       .status(200)
       .json({ message: "login Successfull", email: data.email });
   } catch (error) {

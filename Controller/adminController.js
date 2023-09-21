@@ -58,7 +58,7 @@ const AdminLogin = async (req, res) => {
     if (!adminToken) return res.status(400).send("token not generated");
 
     res
-      .cookie("adminToken", adminToken, { httpOnly: true })
+      .cookie("adminToken", adminToken, { httpOnly: true, secure: true })
       .status(200)
       .json({ message: "login Successfull", email: data.email });
   } catch (error) {
