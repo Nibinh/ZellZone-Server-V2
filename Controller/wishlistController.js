@@ -37,6 +37,7 @@ const removeFromWishlist = async (req, res) => {
 
     user.wishlist.pull(prodId);
     user.save();
+
     res.status(200).send("Removed from Wishlsit");
   } catch (error) {
     res.status(500).json({ error: "An error occurred: " + error.message });

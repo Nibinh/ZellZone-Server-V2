@@ -93,7 +93,7 @@ const editUser = async (req, res) => {
           },
         }
       );
-      res.status(200).json({ message: "updated", data: updatedData });
+      res.status(200).json({ message: "Updated", data: updatedData });
     } else {
       const updatedData = await User.updateOne(
         { _id: id },
