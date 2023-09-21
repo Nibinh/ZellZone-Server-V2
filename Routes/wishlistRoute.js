@@ -13,6 +13,6 @@ router.get(
   verifyToken,
   wishlist.removeFromWishlist
 );
-router.get("/gettingall/:id", wishlist.viewAllWishlist);
+router.get("/gettingall/:id", verifyToken, wishlist.viewAllWishlist);
 
 module.exports = router;

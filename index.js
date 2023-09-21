@@ -4,7 +4,12 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const server = express();
-server.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+server.use(
+  cors({
+    origin: "https://playful-puppy-6359af.netlify.app/",
+    credentials: true,
+  })
+);
 server.use(express.json());
 dotenv.config();
 server.use(cookieParser());
