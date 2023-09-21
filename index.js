@@ -9,8 +9,8 @@ server.use(express.json());
 dotenv.config();
 server.use(cookieParser());
 
-const PORT = process.env.PORT;
-console.log(PORT);
+const PORT = process.env.PORT || 8000;
+
 server.listen(PORT, () => {
   console.log(`Server started at ${PORT}`);
 });
