@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const server = express();
 server.use(
   cors({
-    origin: "https://playful-puppy-6359af.netlify.app/",
+    origin: "https://playful-puppy-6359af.netlify.app",
     credentials: true,
   })
 );
